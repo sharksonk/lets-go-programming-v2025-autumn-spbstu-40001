@@ -21,9 +21,10 @@ func SaveJSON(outputFile string, data any) error {
 	if err != nil {
 		return fmt.Errorf("failed to creating file: %w", err)
 	}
+
 	defer func() {
 		if closeErr := file.Close(); closeErr != nil {
-			fmt.Printf("warning: failed to close file: %v\n", closeErr)
+			fmt.Printf("failed to close file: %v\n", closeErr)
 		}
 	}()
 
