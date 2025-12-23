@@ -1,0 +1,52 @@
+package db
+
+import (
+	"database/sql"
+	"fmt"
+)
+
+type Database interface {
+	Query(query string, args ...any) (*sql.Rows, error)
+}
+
+type DBService struct {
+	DB Database
+}
+
+func New(db Database) *DBService {
+	return &DBService{DB: db}
+}
+
+func (service *DBService) queryNames(query string) ([]string, error) {
+	rows, err := service.DB.Query(query)
+	if err != nil {
+		return nil, fmt.Errorf("db query: %w", err)
+	}
+	defer rows.Close()
+
+	var names []string
+
+	for rows.Next() {
+		var name string
+
+		if err := rows.Scan(&name); err != nil {
+			return nil, fmt.Errorf("rows scanning: %w", err)
+		}
+
+		names = append(names, name)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("rows error: %w", err)
+	}
+
+	return names, nil
+}
+
+func (service *DBService) GetNames() ([]string, error) {
+	return service.queryNames("SELECT name FROM users")
+}
+
+func (service *DBService) GetUniqueNames() ([]string, error) {
+	return service.queryNames("SELECT DISTINCT name FROM users")
+}
