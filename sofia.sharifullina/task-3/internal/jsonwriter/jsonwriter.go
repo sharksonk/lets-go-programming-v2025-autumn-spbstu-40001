@@ -15,7 +15,7 @@ func SaveJSON(outputFile string, data any, filePermission, dirPermission os.File
 		return fmt.Errorf("failed to creating directory: %w", err)
 	}
 
-	file, err := os.Create(outputFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, filePermission)
+	file, err := os.OpenFile(outputFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, filePermission)
 	if err != nil {
 		return fmt.Errorf("failed to creating file: %w", err)
 	}
