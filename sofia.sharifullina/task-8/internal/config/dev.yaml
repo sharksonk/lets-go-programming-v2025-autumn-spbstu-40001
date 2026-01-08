@@ -1,4 +1,2 @@
 environment: "dev"
 log_level: "debug"
-
-log_level: "debug"
