@@ -24,6 +24,7 @@ func SaveJSON(outputFile string, data any,  filePermission, dirPermission os.Fil
 		err = file.Close()
 		if err != nil {
 			panic("failed to close file in saveJSON")
+                }
 	}()
 
 	encoder := json.NewEncoder(file)
