@@ -5,9 +5,10 @@ import (
 	"net"
 	"testing"
 
-	mywifi "github.com/sharksonk/task-6/internal/wifi"
 	"github.com/mdlayher/wifi"
 	"github.com/stretchr/testify/require"
+
+        mywifi "github.com/sharksonk/task-6/internal/wifi"
 )
 
 var errWiFi = errors.New("wifi error")
