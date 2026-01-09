@@ -8,7 +8,7 @@ import (
 	"github.com/mdlayher/wifi"
 	"github.com/stretchr/testify/require"
 
-        mywifi "github.com/sharksonk/task-6/internal/wifi"
+	mywifi "github.com/sharksonk/task-6/internal/wifi"
 )
 
 var errWiFi = errors.New("wifi error")
